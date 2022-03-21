@@ -1,0 +1,22 @@
+################################
+#     2022 (c) Der_Googler     #
+#  Fake Shell Android Charger  #
+################################
+
+i=1
+while [ $i -le 100 ]
+do
+    # Change the battery steps every by one
+    cmd battery set level $i
+    echo "Battery level => $i"
+    # Sleep to avoid an direct set
+    sleep 0.3
+    i=$(($i+1))
+done
+echo "Battery state will be rested in 2 sec."
+# Sleep after successfully execution 
+sleep 2
+echo "Reset battery state"
+# Reset the battery to the default sate
+cmd battery reset
+echo "Battery state successfully rested"
