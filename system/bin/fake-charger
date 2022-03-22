@@ -1,19 +1,61 @@
 #!/system/bin/sh
-
 ################################
 #     2022 (c) Der_Googler     #
 #  Fake Shell Android Charger  #
 ################################
 
+helpFunction()
+{
+   echo ""
+   echo "Usage: $0 -speed 0.3 -max 101 -a 1"
+   echo -e "\t-s Changes the charge speed (default: 0.3)"
+   echo -e "\t-m Changes the maximal charge value (default: 100)"
+   echo -e "\t-r Reset the battery state"
+   echo -e "\t-a Changes the maximal adding value (default:1)"
+   exit 1 # Exit script after printing help
+}
+
+resetBatteryState()
+{
+  echo "Battery state was successfully reseted"
+  exec cmd battery reset
+}
+
+printBanner()
+{
+  echo "################################"
+  echo "#     2022 (c) Der_Googler     #"
+  echo "#  Fake Shell Android Charger  #"
+  echo "################################"
+}
+
+while getopts "s:hm:a:r" opt
+do
+   case "$opt" in
+      s ) _maxspeed_="$OPTARG" ;;
+      m ) _maxcharge_="$OPTARG" ;;
+      a ) _maxadd_="$OPTARG" ;;
+      h ) helpFunction ;;
+      r ) resetBatteryState ;;
+   esac
+done
+
+# Variables
+MAXSPEED="${_maxspeed_:=0.3}"
+MAXCHARGE="${_maxcharge_:=100}"
+MAXADD="${_maxadd_:=1}"
+
+printBanner
+
 i=1
-while [ $i -le 100 ]
+while [ $i -le $MAXCHARGE ]
 do
     # Change the battery steps every by one
     cmd battery set level $i
     echo "Battery level => $i"
     # Sleep to avoid an direct set
-    sleep 0.3
-    i=$(($i+1))
+    sleep $MAXSPEED
+    i=$(($i+$MAXADD))
 done
 echo "Battery state will be rested in 2 sec."
 # Sleep after successfully execution 
@@ -22,3 +64,5 @@ echo "Reset battery state"
 # Reset the battery to the default sate
 cmd battery reset
 echo "Battery state successfully rested"
+# Close
+exit 1
