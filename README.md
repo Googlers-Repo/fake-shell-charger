@@ -1,8 +1,9 @@
 # Fake Shell Charger
 
-This is not a real charger, here can you troll your friends 
+This is not a real charger, here can you troll your friends
 
 ## Usage
+
 ```shell
 fake-charger -s 0.3 -m 101 -a 1
 ```

@@ -1,0 +1,3 @@
+#!/system/bin/sh
+
+cmd battery set level $@

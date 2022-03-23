@@ -7,8 +7,8 @@ do
   sleep 1
 done
 
-# Sleep an additional 40s to ensure init is finished
-sleep 40
+# Sleep an additional 20s to ensure init is finished
+sleep 20
 
 # Run fake-charger after boot
 fake-charger -s 0 -m 100 -a 1
