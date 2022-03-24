@@ -48,5 +48,6 @@ makeExecutable fake-charger
 makeExecutable setBattery
 makeExecutable resetBattery
 makeExecutable unplugBattery
+makeExecutable notification
 
 systemWrite false 

@@ -1,0 +1,11 @@
+#!/system/bin/sh
+
+while getopts "t:m:" opt
+do
+   case "$opt" in
+      t ) title="$OPTARG" ;;
+      m ) message="$OPTARG" ;;
+   esac
+done
+
+su -lp 2000 -c "cmd notification post -S bigtext -t '$title' 'Tag' '$message'"
