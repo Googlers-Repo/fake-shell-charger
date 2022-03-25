@@ -1,4 +1,4 @@
-#!/system/bin/sh
+#!/bin/sh
 ################################
 #     2022 (c) Der_Googler     #
 #  Fake Shell Android Charger  #
@@ -8,10 +8,15 @@ helpFunction()
 {
    echo ""
    echo "Usage: $0 -speed 0.3 -max 101 -a 1"
-   echo -e "\t-s Changes the charge speed (default: 0.3)"
-   echo -e "\t-m Changes the maximal charge value (default: 100)"
-   echo -e "\t-r Reset the battery state"
-   echo -e "\t-a Changes the maximal adding value (default:1)"
+   echo "\t-s, --speed              \t Changes the charge speed (default: 0.3)"
+   echo "\t-m, --maxcharge          \t Changes the maximal charge value (default: 100)"
+   echo "\t-r, --resetBatteryState  \t Reset the battery state"
+   echo "\t-a, --maxadd             \t Changes the maximal adding value (default:1)"
+   echo "\t-h. --help               \t Prints the help"
+   echo "################################ Other scripts ################################"
+   echo "\tsetBattery    <value>    \t Set an custom value for the battery"
+   echo "\tresetBattery  [-f]       \t Resets the battery state to the default"
+   echo "\tunplugBattery [-f]       \t Unplugs the battery from the REAL charge"
    exit 1 # Exit script after printing help
 }
 
@@ -40,6 +45,28 @@ do
    esac
 done
 
+while [ "${1:-}" != "" ];
+do
+   case "$1" in
+      "--speed")
+        _maxspeed_="$2"
+        ;;
+      "--maxcharge")
+        _maxcharge_="$2"
+        ;;
+      "--maxadd")
+        _maxadd_="$2"
+        ;;
+      "--help")
+        helpFunction
+        ;;
+      "--resetBatteryState")
+        resetBatteryState
+        ;;
+   esac
+   shift
+done
+
 # Variables
 MAXSPEED="${_maxspeed_:=0.3}"
 MAXCHARGE="${_maxcharge_:=100}"
@@ -57,12 +84,19 @@ do
     sleep $MAXSPEED
     i=$(($i+$MAXADD))
 done
+
 echo "Battery state will be rested in 2 sec."
 # Sleep after successfully execution 
+
 sleep 2
+
 echo "Reset battery state"
+
 # Reset the battery to the default sate
+
 cmd battery reset
+
 echo "Battery state successfully rested"
+
 # Close
 exit 1
