@@ -1,19 +1,31 @@
-#!/bin/sh
-################################
-#     2022 (c) Der_Googler     #
-#  Fake Shell Android Charger  #
-################################
+#!/system/bin/sh
+
+# set source code directory
+srcDir="$(cd "${0%/*}" 2>/dev/null || :; echo "$PWD")"
+
+# get the prop from the module.prop
+getProp() { sed -n "s|^$1=||p" ${2:-$srcDir/module.prop}; }
+
+
+name=$(getProp name)
+author=$(getProp author)
+version=$(getProp version)
+versionCode=$(getProp versionCode)
+minApi=$(getProp minApi)
+minMagisk=$(getProp minMagisk)
+year=$(getProp year)
+
 
 helpFunction()
 {
    echo ""
-   echo "Usage: $0 -speed 0.3 -max 101 -a 1"
+   echo "Usage: $0 -s 0.3 -m 101 -a 1"
    echo "\t-s, --speed              \t Changes the charge speed (default: 0.3)"
    echo "\t-m, --maxcharge          \t Changes the maximal charge value (default: 100)"
    echo "\t-r, --resetBatteryState  \t Reset the battery state"
    echo "\t-a, --maxadd             \t Changes the maximal adding value (default:1)"
    echo "\t-h. --help               \t Prints the help"
-   echo "################################ Other scripts ################################"
+   echo "Others:"
    echo "\tsetBattery    <value>    \t Set an custom value for the battery"
    echo "\tresetBattery  [-f]       \t Resets the battery state to the default"
    echo "\tunplugBattery [-f]       \t Unplugs the battery from the REAL charge"
@@ -28,10 +40,14 @@ resetBatteryState()
 
 printBanner()
 {
-  echo "################################"
-  echo "#     2022 (c) Der_Googler     #"
-  echo "#  Fake Shell Android Charger  #"
-  echo "################################"
+  echo "\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  echo "\t$year (c) $author"
+  echo "\tFake Shell Android Charger"
+  echo "\t═══════════════════════════════════════"
+  echo "\tVersion   > $version ($versionCode)"
+  echo "\tminApi    > $minApi"
+  echo "\tminMagisk > $minMagisk"
+  echo "\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
 
 while getopts "s:hm:a:r" opt

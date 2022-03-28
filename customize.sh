@@ -5,14 +5,14 @@ print() {
 }
 
 print_modname() {
-    print "===================================="
+    print "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     print "        Fake Shell Charger          "
-    print "------------------------------------"
+    print "════════════════════════════════════"
     print " Instructions:                      "
     print " - Open Terminal                    "
     print " - Type su & tap enter              "
     print " - Type fake-charger -h & tap enter "
-    print "===================================="
+    print "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
 
 makeExecutable() {
