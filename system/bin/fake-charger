@@ -1,21 +1,5 @@
 #!/system/bin/sh
 
-# set source code directory
-srcDir="$(cd "${0%/*}" 2>/dev/null || :; echo "$PWD")"
-
-# get the prop from the module.prop
-getProp() { sed -n "s|^$1=||p" ${2:-$srcDir/module.prop}; }
-
-
-name=$(getProp name)
-author=$(getProp author)
-version=$(getProp version)
-versionCode=$(getProp versionCode)
-minApi=$(getProp minApi)
-minMagisk=$(getProp minMagisk)
-year=$(getProp year)
-
-
 helpFunction()
 {
    echo ""
@@ -36,18 +20,6 @@ resetBatteryState()
 {
   echo "Battery state was successfully reseted"
   exec cmd battery reset
-}
-
-printBanner()
-{
-  echo "\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-  echo "\t$year (c) $author"
-  echo "\tFake Shell Android Charger"
-  echo "\t═══════════════════════════════════════"
-  echo "\tVersion   > $version ($versionCode)"
-  echo "\tminApi    > $minApi"
-  echo "\tminMagisk > $minMagisk"
-  echo "\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
 
 while getopts "s:hm:a:r" opt
@@ -87,8 +59,6 @@ done
 MAXSPEED="${_maxspeed_:=0.3}"
 MAXCHARGE="${_maxcharge_:=100}"
 MAXADD="${_maxadd_:=1}"
-
-printBanner
 
 i=1
 while [ $i -le $MAXCHARGE ]
