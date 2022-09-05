@@ -31,7 +31,7 @@ setBattery 2000
 
 ### Unplug Battery
 
-> This can be buggy, avoid using this.
+{{warn-alert=Warning}This can be buggy, avoid using this.}
 
 ```sh
 unplugBattery
