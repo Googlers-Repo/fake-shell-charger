@@ -11,7 +11,7 @@ fake-charger --speed 0.3 --max 101 --steps 1
 Usage
 
 ```
-Usage: ./fake-charger.sh --speed 0.3 --max 101 --steps 1
+Usage: fake-charger.sh --speed 0.3 --max 101 --steps 1
 
         --speed         changes the charge speed (default: 0.3)
         --max           changes the maximal charge value (default: 100)
