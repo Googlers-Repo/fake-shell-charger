@@ -1,9 +1,8 @@
 id=fake-shell-android-charger
 name=Fake Shell Charger
-version=1.7.1
-versionCode=171
+version=1.7.2
+versionCode=172
 author=Der_Googler
 description=Battery view from 1 to 100 in under one minute (Fun tool)
 minApi=21
 minMagisk=12000
-alpahMMRLinstall=true
