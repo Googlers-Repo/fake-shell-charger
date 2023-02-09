@@ -6,4 +6,6 @@ author=Der_Googler
 description=Battery view from 1 to 100 in under one minute (Fun tool)
 minApi=21
 minMagisk=12000
-alpahMMRLinstall=true
+
+# Googlers Repo Configuartion
+gr_ignore=yes

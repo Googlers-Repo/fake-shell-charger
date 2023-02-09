@@ -133,11 +133,13 @@ print_modname() {
 }
 
 on_install() {
+    # If someone tries to install it, abort the installation
+    abort "! This module is dangerous for some rom/devices... They can't handle an to HIGH or TO LOW battery percent and forced to shutdown which actually NOT shutdown the device, i'll keeps you in the shutdown screen. So don't use this module to prevent broken systems/roms."
     # The following is the default implementation: extract $ZIPFILE/system to $MODPATH
     # Extend/change the logic to whatever you want
     ui_print "- Extracting module files"
     unzip -o "$ZIPFILE" 'system/*' -d $MODPATH >&2
-    
+
     # Symbolic link for lowercase/UPPERCASE support in terminal
     [ -d "$MODPATH/system/bin/" ] || mkdir -p "$MODPATH/system/bin/"
     ln -sf fake-charger "$MODPATH/system/bin/fakecharger"

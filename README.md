@@ -1,3 +1,7 @@
+# DEPRECATED
+
+This module is dangerous for some rom/devices... They can't handle an to HIGH or TO LOW battery percent and forced to shutdown which actually NOT shutdown the device, i'll keeps you in the shutdown screen. So don't use this module to prevent broken systems/roms.
+
 # Fake Shell Charger
 
 This is not a real charger, here can you troll your friends
