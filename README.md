@@ -15,15 +15,16 @@ fake-charger --speed 0.3 --max 101 --steps 1
 Usage
 
 ```
-Usage: fake-charger.sh --speed 0.3 --max 101 --steps 1
+Usage: system/bin/fake-charger.sh [options]
 
-        --speed         changes the charge speed (default: 0.3)
-        --max           changes the maximal charge value (default: 100)
-        --reset         resets the battery state
-        --unplug        unplugs the battery from the REAL charge
-        --set           sets custom battery value
-        --steps         Changes the maximal adding value (default: 1)
-        --help          prints this message
+   --speed    changes the charge speed (default: 0.3)
+   --max      changes the maximal charge value (default: 100)
+   --reset    resets the battery state
+   --unplug   unplugs the battery from the REAL charge
+   --set      sets custom battery value
+   --steps    changes the maximal adding value (default: 1)
+   --stdout   prints every battery level into the stdout
+   --help     prints this message
 ```
 
 ### Custom Vaule

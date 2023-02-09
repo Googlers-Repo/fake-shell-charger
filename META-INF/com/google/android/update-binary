@@ -29,5 +29,43 @@ mount /data 2>/dev/null
 . /data/adb/magisk/util_functions.sh
 [ $MAGISK_VER_CODE -lt 20400 ] && require_new_magisk
 
+MINAPI=`grep_prop minApi $TMPDIR/module.prop`
+MAXAPI=`grep_prop minApi $TMPDIR/module.prop`
+REQUIRE_MODULE=`grep_prop require_module $TMPDIR/module.prop`
+CONFLICT_MODULE=`grep_prop conflict_module $TMPDIR/module.prop`
+
+# Abort if it don't meet the api requirements
+if [ ! -z $MINAPI ]; then
+  ui_print "- Checking Android SDK version..."
+  ui_print "- SDK version: $API"
+  if [ $API -lt $MINAPI ]; then
+    abort "! Device don't meet requirements. Got API $API, but required is $MINAPI"
+  fi
+else
+  ui_print "- 'minApi' is unset, continue..."
+fi
+
+if [ ! -z $REQUIRE_MODULES ]; then
+  ui_print "- Checking for required modules..."
+  for rmodule in $(echo $REQUIRE_MODULES | tr "," "\n"); do
+    if [ ! -d "$MAGISKTMP/.magisk/modules/$rmodule" ]; then
+      abort "! $rmodule is required, please install it to use this module."
+    fi
+  done
+else
+  ui_print "- 'require_module' is unset, continue..."
+fi
+
+if [ ! -z $CONFLICT_MODULE ]; then
+  ui_print "- Checking for conflict modules..."
+  for cmodule in $(echo $CONFLICT_MODULES | tr "," "\n"); do
+    if [ -d "$MAGISKTMP/.magisk/modules/$cmodule" ]; then
+      abort "! $cmodule is a conflicting module, please remove it to use this module."
+    fi
+  done
+else
+  ui_print "- 'conflict_module' is unset, continue..."
+fi
+
 install_module
 exit 0
